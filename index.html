@@ -10,7 +10,6 @@
     />
   </head>
   <style>
-    fdjnjd
     * {
       margin: 0;
       padding: 0;
@@ -24,7 +23,6 @@
     .container {
       background-color: white;
       width: 40%;
-      min-width: 450px;
       position: absolute;
       transform: translate(-50%, -50%);
       top: 50%;
@@ -113,6 +111,45 @@
       font-family: Verdana, Geneva, Tahoma, sans-serif;
       color: rgb(34, 34, 184);
     }
+    @media (min-width: 400px) {
+      .container {
+        width: 80vw;
+        height: 90vh;
+      }
+      input {
+        width: 60vw;
+        height: 6vh;
+        position: relative;
+        left: 6px;
+      }
+      #push {
+        width: 25vw;
+        position: relative;
+        left: 85px;
+      }
+      ::placeholder {
+        font-weight: 400;
+        padding-left: 10px;
+      }
+      #newtask {
+        width: 80vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: start;
+        position: relative;
+        top: 20px;
+      }
+      .tasks {
+        position: relative;
+        left: 35px;
+        top: 10px;
+      }
+      .flex {
+        position: relative;
+        top: 20px;
+      }
+    }
   </style>
   <body>
     <div class="container">
@@ -125,10 +162,17 @@
     </div>
     <script type="text/javascript">
       let input = document.querySelector("input");
+      const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+      function saveTasks() {
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+      }
+
       document.querySelector("#push").onclick = function () {
         if (document.querySelector("#newtask input").value.length == 0) {
           alert("please enter a task");
         } else {
+          tasks.push(document.querySelector("#newtask input").value);
+          saveTasks();
           document.querySelector("#task").innerHTML += ` 
             <div class="tasks">
                 <span id="taskname">
